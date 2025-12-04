@@ -1,0 +1,55 @@
+.profile-container {
+  padding: 20px;
+  color: #fff;
+  max-width: 600px;
+  margin: auto;
+}
+
+.profile-card {
+  background: #1e1e2f;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.profile-card label {
+  display: block;
+  margin-top: 15px;
+  font-size: 15px;
+  color: #ddd;
+}
+
+.profile-card input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: none;
+  background: #29293d;
+  color: #fff;
+  font-size: 15px;
+}
+
+.btn-update,
+.btn-password {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #4facfe;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-password {
+  background: #ff4757;
+}
+
+.msg {
+  margin-top: 10px;
+  color: #2ed573;
+  font-weight: bold;
+}

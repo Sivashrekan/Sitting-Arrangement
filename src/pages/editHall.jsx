@@ -1,0 +1,100 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import AdminLayout from "../layouts/adminlayout";
+import "../CSS/form.css";
+
+function EditHall() {
+  const { hall_id } = useParams();
+  const navigate = useNavigate();
+  const [hall, setHall] = useState(null);
+  const [departments, setDepartments] = useState([]);
+  const [message, setMessage] = useState("");
+
+  // Load current hall data
+  const loadHall = async () => {
+    const res = await fetch("http://localhost:5000/get-halls");
+    const data = await res.json();
+
+    if (data.success) {
+      const h = data.halls.find((x) => x.hall_id == hall_id);
+      setHall(h);
+    }
+  };
+
+  const loadDepartments = async () => {
+    const res = await fetch("http://localhost:5000/get-departments");
+    const data = await res.json();
+    if (data.success) setDepartments(data.departments);
+  };
+
+  useEffect(() => {
+    loadHall();
+    loadDepartments();
+  }, []);
+
+  const handleChange = (e) => {
+    setHall({ ...hall, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      hall_name: hall.hall_name,
+      table_rows: hall.table_rows,
+      table_columns: hall.table_columns,
+      department_id: hall.department_id,
+    };
+
+    const res = await fetch(`http://localhost:5000/update-hall/${hall_id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setMessage("Hall updated successfully!");
+      setTimeout(() => {
+        navigate("/view-halls");
+      }, 2000);
+    }
+  };
+
+  if (!hall) return <AdminLayout><h2>Loading...</h2></AdminLayout>;
+
+  return (
+    <AdminLayout>
+      <div className="form-container">
+        <h1>Edit Hall</h1>
+        {message && <p className="msg">{message}</p>}
+
+        <form className="form-box" onSubmit={handleSubmit}>
+          <label>Hall Name</label>
+          <input type="text" name="hall_name" value={hall.hall_name} onChange={handleChange} />
+
+          <label>Rows</label>
+          <input type="number" name="table_rows" value={hall.table_rows} onChange={handleChange} />
+
+          <label>Columns</label>
+          <input type="number" name="table_columns" value={hall.table_columns} onChange={handleChange} />
+
+          <label>Department</label>
+          <select name="department_id" value={hall.department_id} onChange={handleChange}>
+            <option value="">General Hall</option>
+            {departments.map((d) => (
+              <option key={d.department_id} value={d.department_id}>
+                {d.department_name}
+              </option>
+            ))}
+          </select>
+
+          <button className="btn">Update Hall</button>
+        </form>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default EditHall;

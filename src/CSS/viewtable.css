@@ -1,0 +1,130 @@
+.table-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.table-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0b0d36;
+}
+
+/* TABLE STYLE */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
+}
+
+.custom-table thead {
+  background: #005bea;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 14px;
+  text-align: center;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table tbody tr:hover {
+  background: #f7faff;
+}
+
+.no-data {
+  padding: 20px;
+  font-size: 18px;
+  color: #777;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .custom-table th,
+  .custom-table td {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+/* Filter Box */
+.filter-box {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.filter-box select,
+.filter-box input[type="date"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+/* HOD Row Highlight */
+.hod-row {
+  background: #fff3cd !important;
+  font-weight: bold;
+}
+
+/* HOD Missing Card */
+.hod-missing-card {
+  background: #ffe8e8;
+  padding: 15px;
+  border-left: 5px solid red;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.hod-missing-card h3 {
+  margin: 0 0 5px;
+  color: red;
+}
+
+/* Buttons */
+.edit-btn,
+.update-btn {
+  background: #00a2ff;
+  color: white;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.edit-btn:hover,
+.update-btn:hover {
+  background: #007acc;
+}
+
+.delete-btn {
+  background: #ff4b4b;
+  color: white;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #d90000;
+}
+
+/* Columns */
+.role-col {
+  text-align: center;
+  font-weight: 600;
+}
+
+.option-col {
+  display: flex;
+  gap: 10px;
+}

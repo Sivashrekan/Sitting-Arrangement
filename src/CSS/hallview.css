@@ -1,0 +1,110 @@
+.seat-grid {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.row {
+  display: flex;
+  gap: 25px;
+}
+
+.bench {
+  width: 260px;
+  height: 85px;
+  border: 3px solid black;
+  border-radius: 10px;
+  background: linear-gradient(100deg,white,rgb(186, 255, 237));  /* ✅ Bench background color (light green) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.seat-row {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+}
+
+.seat-circle {
+  width: 35px;
+  height: 35px;
+  border: 4px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.seat-1 {
+  background: #8ec9ff;   
+  border-color: #0066cc;
+}
+
+.seat-2 {
+  background: #ffe58d;   
+  border-color: #cc9900;
+}
+
+.seat-3 {
+  background: #ff9d9d;   
+  border-color: #cc0000;
+}
+
+.seat-circle:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.seat-label {
+  position: absolute;
+  top: -32px;
+  left: -18px;
+  background: white;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-weight: bold;
+  border: 1px solid #333;
+  border-radius: 5px;
+  display: none;
+}
+
+.seat-circle:hover .seat-label {
+  display: block;
+  z-index: 999;
+}
+
+.hall-info {
+  margin-bottom: 25px;
+}
+
+.hall-info h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #003c7a;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hall-details {
+  background: #f4fbff; 
+  border: 2px solid #c9e8ff;
+  padding: 18px 22px;
+  border-radius: 12px;
+  max-width: 350px;
+  box-shadow: 0px 3px 12px rgba(0,0,0,0.1);
+}
+
+.hall-details p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.hall-details b {
+  color: #005bea; 
+}

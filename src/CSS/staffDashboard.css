@@ -1,0 +1,53 @@
+.staff-dashboard {
+  padding: 20px;
+  color: #fff;
+}
+
+.welcome {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.subtext {
+  color: #ccc;
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.dash-card {
+  background: #1e1e2f;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.dash-card:hover {
+  transform: scale(1.05);
+}
+
+.dash-card h2 {
+  font-size: 42px;
+  margin: 0;
+  font-weight: 700;
+  color: #ccc;
+}
+
+.dash-card p {
+  margin-top: 8px;
+  font-size: 18px;
+  color: #aaa;
+}
+
+/* Color bars */
+.students { border-left: 6px solid #4facfe; }
+.staff    { border-left: 6px solid #ff9f43; }
+.halls    { border-left: 6px solid #2ed573; }
+.exams    { border-left: 6px solid #ff4757; }

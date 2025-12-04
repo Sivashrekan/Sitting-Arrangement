@@ -1,0 +1,138 @@
+/* ---------- GLOBAL ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ---------- LAYOUT WRAPPER ---------- */
+.admin-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* ---------- SIDEBAR (FIXED) ---------- */
+.scroll-sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #0a0e3f;
+  z-index: 1000;
+  padding: 30px 18px;
+}
+
+/* Sidebar Scrollbar */
+.scroll-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-sidebar::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+}
+.scroll-sidebar::-webkit-scrollbar-track {
+  background: #11133d;
+}
+
+/* ---------- SIDEBAR CONTENT ---------- */
+.side-title {
+  color: #ffb300;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.side-menu {
+  list-style: none;
+  color: rgb(210, 210, 210);
+  margin: 0;
+  padding: 0;
+}
+
+.side-menu li {
+  background: #1b1d52;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.side-menu li:hover {
+  background: rgb(255, 196, 70);
+  color: #11133d;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+.admin-content {
+  margin-left: 260px !important;
+  min-height: 100vh;
+  padding: 30px 40px;
+  background: linear-gradient(125deg, white, rgb(146, 241, 146));
+}
+
+/* Inner container */
+.admin-content .page-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ---------- HEADER ---------- */
+.admin-header {
+  background: linear-gradient(135deg, #005bea, #00c6fb);
+  padding: 30px;
+  color: white;
+  border-radius: 18px;
+  margin-bottom: 40px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.admin-header h1 {
+  font-size: 34px;
+  margin-bottom: 5px;
+}
+
+/* ---------- STATS GRID ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stat-card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  color: #11133d;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.stat-card p {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffb300;
+}
+

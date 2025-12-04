@@ -1,0 +1,125 @@
+/* PAGE CONTAINER */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+}
+
+/* SMALL BACK BUTTON */
+.back-small {
+  position: absolute;
+  left: 40px;
+  top: 20px;
+  background: transparent;
+  border: none;
+  color: #005bea;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back-small:hover {
+  color: #003e9a;
+}
+
+/* MAIN CARD */
+.profile-card {
+  background: white;
+  width: 650px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+}
+
+/* IMAGE + TEXT ROW */
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #005bea;
+  object-fit: cover;
+}
+
+/* RIGHT SIDE INFO */
+.profile-info-block h2 {
+  margin: 0;
+  font-size: 25px;
+  color: #0b0d36;
+}
+
+.profile-email {
+  color: gray;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* ROLE BADGE */
+.role-badge {
+  padding: 6px 14px;
+  background: #ffc740;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #0b0d36;
+}
+
+.role-badge.super {
+  background: red;
+  color: white;
+}
+
+/* BUTTONS */
+.profile-buttons {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.edit-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background: #005bea;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #0074ff;
+}
+
+/* ACCOUNT INFO SECTION */
+.profile-info h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #0b0d36;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.info-row label {
+  font-weight: bold;
+  color: #555;
+}
+
+.info-row p {
+  margin: 0;
+  color: #333;
+}

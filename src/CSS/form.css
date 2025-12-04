@@ -1,0 +1,193 @@
+/* MAIN FORM CONTAINER */
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  margin-left: 260px;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* PAGE TITLE */
+.form-container h1,
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0b0d36;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* SUCCESS / ERROR MESSAGE */
+.msg {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  background: #e8ffe8;
+  color: #007f00;
+  border: 1px solid #00aa00;
+}
+
+/* FORM BOX */
+.form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* LABELS */
+.form-box label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* INPUTS + SELECT */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 10px;
+  transition: 0.25s;
+  background: white;
+}
+
+/* FOCUS EFFECT */
+input:focus,
+select:focus {
+  border-color: #005bea;
+  box-shadow: 0 0 6px rgba(0, 91, 234, 0.4);
+}
+
+/* BUTTON */
+.btn,
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #005bea;
+  color: white;
+  border-radius: 12px;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover,
+button:hover {
+  background: #0074ff;
+}
+
+/* Dept Button Group */
+.dept-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dept-btn {
+  padding: 10px 15px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 15px;
+}
+
+.dept-btn:hover {
+  background: #eef3ff;
+  border-color: #005bea;
+}
+
+.dept-btn.selected {
+  background: #005bea;
+  color: white;
+  border-color: #003d9a;
+}
+
+/* MULTI SELECT BOX */
+.multi-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.multi-item {
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f9f9f9;
+  transition: 0.2s ease;
+  user-select: none;
+}
+
+.multi-item:hover {
+  background: #eaeaea;
+}
+
+.multi-item.active {
+  background: #007bff;
+  color: white;
+  border-color: #0059c9;
+  font-weight: bold;
+}
+
+/* VIEW STUDENTS FILTERS */
+.view-students-container {
+  width: 90%;
+  margin: auto;
+}
+
+.filter-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-row select,
+.filter-row input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 180px;
+}
+
+.apply-btn {
+  background: #0066ff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+  .form-container {
+    width: 92%;
+    margin-left: 0 !important;
+    padding: 20px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,57 @@
+.student-dashboard {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background: #eef1ff;
+  min-height: 100vh;
+}
+
+.student-card, .seating-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  margin-bottom: 15px;
+  color: #0b0d36;
+}
+
+.info-box p {
+  margin: 8px 0;
+  font-size: 17px;
+}
+
+.seat-details p {
+  margin: 8px 0;
+  font-size: 18px;
+}
+
+.seat-number {
+  background: #ffc740;
+  padding: 5px 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  color: #0b0d36;
+}
+
+.no-seat {
+  color: red;
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.filter-box {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.filter-box select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+

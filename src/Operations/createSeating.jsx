@@ -10,8 +10,8 @@ function CreateSeating() {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedYears, setSelectedYears] = useState([]);
 
-  const [examMapping, setExamMapping] = useState({}); // year → exam_id
-  const [yearWiseExams, setYearWiseExams] = useState({}); // year → exam list
+  const [examMapping, setExamMapping] = useState({}); 
+  const [yearWiseExams, setYearWiseExams] = useState({}); 
 
   const [selectedHalls, setSelectedHalls] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");

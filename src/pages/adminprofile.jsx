@@ -36,11 +36,6 @@ function AdminProfile() {
     <AdminLayout>
       <div className="profile-container">
 
-        {/* Back Button */}
-        <button className="back-small" onClick={() => navigate("/admin")}>
-          ← Dashboard
-        </button>
-
         <div className="profile-card">
 
           <div className="profile-row">

@@ -37,9 +37,6 @@ function StaffProfile() {
   return (
     <StaffLayout>
       <div className="profile-container">
-        <button className="back-small" onClick={() => navigate("/staff")}>
-          ← Dashboard
-        </button>
 
         <div className="profile-card">
           <div className="profile-row">

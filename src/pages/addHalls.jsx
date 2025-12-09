@@ -17,7 +17,6 @@ function AddHall() {
     setHall({ ...hall, [e.target.name]: e.target.value });
   };
 
-  // Auto load departments
   const loadDepartments = async () => {
     const res = await fetch("http://localhost:5000/get-departments");
     const data = await res.json();
@@ -60,6 +59,8 @@ function AddHall() {
         {message && <p className="msg">{message}</p>}
 
         <form className="form-box" onSubmit={handleSubmit}>
+
+          {/* Hall Name */}
           <label>Hall Name</label>
           <input
             type="text"
@@ -67,8 +68,14 @@ function AddHall() {
             value={hall.hall_name}
             onChange={handleChange}
             placeholder="Eg: A101, Lab-1"
+            required
+            minLength="2"
+            maxLength="20"
+            pattern="^[A-Za-z0-9\- ]+$"
+            title="Only letters, numbers, spaces, and hyphens allowed"
           />
 
+          {/* Rows */}
           <label>Number of Rows (Benches)</label>
           <input
             type="number"
@@ -76,8 +83,12 @@ function AddHall() {
             value={hall.table_rows}
             onChange={handleChange}
             placeholder="Eg: 5"
+            required
+            min="1"
+            max="50"
           />
 
+          {/* Columns */}
           <label>Number of Columns (Benches)</label>
           <input
             type="number"
@@ -85,8 +96,12 @@ function AddHall() {
             value={hall.table_columns}
             onChange={handleChange}
             placeholder="Eg: 6"
+            required
+            min="1"
+            max="50"
           />
 
+          {/* Department Optional */}
           <label>Department (Optional)</label>
           <select
             name="department_id"

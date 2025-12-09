@@ -10,7 +10,6 @@ function EditHall() {
   const [departments, setDepartments] = useState([]);
   const [message, setMessage] = useState("");
 
-  // Load current hall data
   const loadHall = async () => {
     const res = await fetch("http://localhost:5000/get-halls");
     const data = await res.json();
@@ -58,7 +57,7 @@ function EditHall() {
       setMessage("Hall updated successfully!");
       setTimeout(() => {
         navigate("/view-halls");
-      }, 2000);
+      }, 1500);
     }
   };
 
@@ -71,17 +70,52 @@ function EditHall() {
         {message && <p className="msg">{message}</p>}
 
         <form className="form-box" onSubmit={handleSubmit}>
+
+          {/* Hall Name */}
           <label>Hall Name</label>
-          <input type="text" name="hall_name" value={hall.hall_name} onChange={handleChange} />
+          <input
+            type="text"
+            name="hall_name"
+            value={hall.hall_name}
+            onChange={handleChange}
+            required
+            minLength="2"
+            maxLength="20"
+            pattern="^[A-Za-z0-9\- ]+$"
+            placeholder="Eg: A101, Lab-1"
+          />
 
+          {/* Rows */}
           <label>Rows</label>
-          <input type="number" name="table_rows" value={hall.table_rows} onChange={handleChange} />
+          <input
+            type="number"
+            name="table_rows"
+            value={hall.table_rows}
+            onChange={handleChange}
+            required
+            min="1"
+            max="50"
+          />
 
+          {/* Columns */}
           <label>Columns</label>
-          <input type="number" name="table_columns" value={hall.table_columns} onChange={handleChange} />
+          <input
+            type="number"
+            name="table_columns"
+            value={hall.table_columns}
+            onChange={handleChange}
+            required
+            min="1"
+            max="50"
+          />
 
+          {/* Department optional */}
           <label>Department</label>
-          <select name="department_id" value={hall.department_id} onChange={handleChange}>
+          <select
+            name="department_id"
+            value={hall.department_id}
+            onChange={handleChange}
+          >
             <option value="">General Hall</option>
             {departments.map((d) => (
               <option key={d.department_id} value={d.department_id}>

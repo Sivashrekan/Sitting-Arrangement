@@ -16,6 +16,10 @@ function ViewSeating() {
 
   const [seating, setSeating] = useState([]);
 
+  // 🔥 PAGINATION STATES
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
   useEffect(() => {
     fetch("/get-departments").then(r => r.json()).then(d => d.success && setDepartments(d.departments));
     fetch("/get-halls").then(r => r.json()).then(d => d.success && setHalls(d.halls));
@@ -34,17 +38,39 @@ function ViewSeating() {
     fetch(url)
       .then(r => r.json())
       .then(d => {
-        if (d.success) setSeating(d.seating);
-        else setSeating([]);
+        if (d.success) {
+          setSeating(d.seating);
+          setCurrentPage(1); // reset pagination when filters applied
+        } else {
+          setSeating([]);
+        }
       });
   };
 
+  // -----------------------------------------------
+  // 🔥 PAGINATION LOGIC
+  // -----------------------------------------------
+  const indexLast = currentPage * rowsPerPage;
+  const indexFirst = indexLast - rowsPerPage;
+  const paginatedData = seating.slice(indexFirst, indexLast);
+
+  const totalPages = Math.ceil(seating.length / rowsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+  // -----------------------------------------------
+
   return (
     <AdminLayout>
-      <div className="view-students-container">  {/* SAME CLASS AS VIEW STUDENTS PAGE */}
+      <div className="view-students-container">
         <h1>View Seating Arrangement</h1>
 
-        {/* FILTER ROW (HORIZONTAL) */}
+        {/* FILTERS */}
         <div className="filter-row">
           <select value={selectedDept} onChange={e => setSelectedDept(e.target.value)}>
             <option value="">All Departments</option>
@@ -62,7 +88,6 @@ function ViewSeating() {
             <option value="3">III</option>
             <option value="4">IV</option>
           </select>
-
 
           <select value={selectedExam} onChange={e => setSelectedExam(e.target.value)}>
             <option value="">All Exams</option>
@@ -88,7 +113,6 @@ function ViewSeating() {
         </div>
 
         {/* TABLE */}
-        {/* TABLE */}
         <div className="table-container">
           <table className="custom-table">
             <thead>
@@ -105,8 +129,8 @@ function ViewSeating() {
             </thead>
 
             <tbody>
-              {seating.length > 0 ? (
-                seating.map((s, index) => (
+              {paginatedData.length > 0 ? (
+                paginatedData.map((s, index) => (
                   <tr key={index}>
                     <td>{s.roll_no}</td>
                     <td>{s.name}</td>
@@ -120,14 +144,29 @@ function ViewSeating() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="no-data">
-                    No seating data found.
-                  </td>
+                  <td colSpan="8" className="no-data">No seating data found.</td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
+
+        {/* 🔥 PAGINATION BUTTONS */}
+        {seating.length > 0 && (
+          <div className="pagination">
+            <button disabled={currentPage === 1} onClick={prevPage}>
+              ◀ Prev
+            </button>
+
+            <span>
+              Page {currentPage} / {totalPages}
+            </span>
+
+            <button disabled={currentPage === totalPages} onClick={nextPage}>
+              Next ▶
+            </button>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );

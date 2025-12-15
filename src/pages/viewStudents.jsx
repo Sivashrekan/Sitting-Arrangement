@@ -10,16 +10,18 @@ function ViewStudents() {
   const [deptFilter, setDeptFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
 
-  const navigate = useNavigate();   // ✔ VERY IMPORTANT
+  // PAGINATION STATES
+  const [currentPage, setCurrentPage] = useState(1);
+  const studentsPerPage = 10; // number of rows per page
 
-  // Load departments
+  const navigate = useNavigate();
+
   const loadDepartments = async () => {
     const res = await fetch("http://localhost:5000/get-departments");
     const data = await res.json();
     if (data.success) setDepartments(data.departments);
   };
 
-  // Delete student
   const deleteStudent = async (id) => {
     if (!window.confirm("Are you sure you want to delete this student?")) return;
 
@@ -31,12 +33,9 @@ function ViewStudents() {
     if (data.success) {
       alert("Student deleted!");
       loadStudents(deptFilter, yearFilter);
-    } else {
-      alert("Failed to delete student");
     }
   };
 
-  // Load students
   const loadStudents = async (dept = "", year = "") => {
     let url = "http://localhost:5000/get-students";
 
@@ -48,7 +47,10 @@ function ViewStudents() {
 
     const res = await fetch(url);
     const data = await res.json();
-    if (data.success) setStudents(data.students);
+    if (data.success) {
+      setStudents(data.students);
+      setCurrentPage(1); // reset pagination on filter change
+    }
   };
 
   useEffect(() => {
@@ -59,6 +61,24 @@ function ViewStudents() {
   const applyFilters = () => {
     loadStudents(deptFilter, yearFilter);
   };
+
+  // ------------------------------------
+  // PAGINATION LOGIC 
+  // ------------------------------------
+  const indexOfLast = currentPage * studentsPerPage;
+  const indexOfFirst = indexOfLast - studentsPerPage;
+  const paginatedStudents = students.slice(indexOfFirst, indexOfLast);
+
+  const totalPages = Math.ceil(students.length / studentsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+  // ------------------------------------
 
   return (
     <AdminLayout>
@@ -86,7 +106,7 @@ function ViewStudents() {
         <button className="btn" onClick={applyFilters}>Apply</button>
       </div>
 
-      {/* STUDENTS TABLE */}
+      {/* TABLE */}
       <table className="custom-table">
         <thead>
           <tr>
@@ -102,8 +122,8 @@ function ViewStudents() {
         </thead>
 
         <tbody>
-          {students.length > 0 ? (
-            students.map((s) => (
+          {paginatedStudents.length > 0 ? (
+            paginatedStudents.map((s) => (
               <tr key={s.student_id}>
                 <td>{s.roll_no}</td>
                 <td>{s.name}</td>
@@ -116,7 +136,7 @@ function ViewStudents() {
                 <td>
                   <button
                     className="edit-btn"
-                    onClick={() => navigate(`/edit-student/${s.student_id}`)}  // ✔ FIXED
+                    onClick={() => navigate(`/edit-student/${s.student_id}`)}
                   >
                     ✏️ Edit
                   </button>
@@ -139,6 +159,19 @@ function ViewStudents() {
           )}
         </tbody>
       </table>
+
+      {/* PAGINATION BUTTONS */}
+      <div className="pagination">
+        <button disabled={currentPage === 1} onClick={prevPage}>
+          ◀ Prev
+        </button>
+
+        <span>Page {currentPage} / {totalPages}</span>
+
+        <button disabled={currentPage === totalPages} onClick={nextPage}>
+          Next ▶
+        </button>
+      </div>
     </AdminLayout>
   );
 }

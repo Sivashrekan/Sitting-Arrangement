@@ -6,23 +6,6 @@
   position: relative;
 }
 
-/* SMALL BACK BUTTON */
-.back-small {
-  position: absolute;
-  left: 40px;
-  top: 20px;
-  background: transparent;
-  border: none;
-  color: #005bea;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.back-small:hover {
-  color: #003e9a;
-}
-
 /* MAIN CARD */
 .profile-card {
   background: white;

@@ -12,6 +12,10 @@ function StaffViewSeating() {
   const [seating, setSeating] = useState([]);
   const [search, setSearch] = useState("");
 
+  // 🔥 Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
   // Load exams
   useEffect(() => {
     fetch(`http://localhost:5000/staff/exams/${deptId}`)
@@ -19,7 +23,7 @@ function StaffViewSeating() {
       .then((data) => data.success && setExams(data.exams));
   }, [deptId]);
 
-  // Load dates (created_at)
+  // Load dates
   useEffect(() => {
     if (!selectedExam) return;
 
@@ -36,16 +40,43 @@ function StaffViewSeating() {
       `http://localhost:5000/staff/view-seating/${selectedExam}/${deptId}/${selectedDate}`
     )
       .then((res) => res.json())
-      .then((data) => data.success && setSeating(data.seating));
+      .then((data) => {
+        if (data.success) {
+          setSeating(data.seating);
+          setCurrentPage(1); // reset pagination
+        } else {
+          setSeating([]);
+        }
+      });
   }, [selectedExam, selectedDate, deptId]);
 
-  // Filter logic
+  // 🔍 Search filter
   const filtered = seating.filter((s) =>
     s.student_name.toLowerCase().includes(search.toLowerCase()) ||
     s.roll_no.toLowerCase().includes(search.toLowerCase()) ||
     s.hall_name.toLowerCase().includes(search.toLowerCase()) ||
     s.seat_no.toLowerCase().includes(search.toLowerCase())
   );
+
+  // 🔥 Pagination logic (AFTER search)
+  const indexLast = currentPage * rowsPerPage;
+  const indexFirst = indexLast - rowsPerPage;
+  const paginatedData = filtered.slice(indexFirst, indexLast);
+
+  const totalPages = Math.ceil(filtered.length / rowsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  // Reset page when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   return (
     <StaffLayout>
@@ -54,8 +85,6 @@ function StaffViewSeating() {
 
         {/* FILTERS */}
         <div className="filter-box">
-
-          {/* Exam dropdown */}
           <select
             value={selectedExam}
             onChange={(e) => {
@@ -72,7 +101,6 @@ function StaffViewSeating() {
             ))}
           </select>
 
-          {/* Date dropdown */}
           <select
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
@@ -80,26 +108,19 @@ function StaffViewSeating() {
           >
             <option value="">Select Assigned Date</option>
             {dates.map((d, i) => (
-              <option key={i} value={d}>
-                {d}
-              </option>
+              <option key={i} value={d}>{d}</option>
             ))}
           </select>
         </div>
 
-        {/* SEARCH BOX */}
+        {/* SEARCH */}
         <input
           type="text"
           placeholder="Search by name / roll / hall / seat..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="search-box"
-          style={{
-            padding: "10px",
-            borderRadius: "8px",
-            width: "300px",
-            marginBottom: "20px",
-          }}
+          style={{ width: "300px", marginBottom: "20px" }}
         />
 
         {/* TABLE */}
@@ -115,10 +136,10 @@ function StaffViewSeating() {
           </thead>
 
           <tbody>
-            {filtered.length > 0 ? (
-              filtered.map((s, i) => (
+            {paginatedData.length > 0 ? (
+              paginatedData.map((s, i) => (
                 <tr key={i}>
-                  <td>{i + 1}</td>
+                  <td>{indexFirst + i + 1}</td>
                   <td>{s.hall_name}</td>
                   <td>{s.seat_no}</td>
                   <td>{s.roll_no}</td>
@@ -136,6 +157,23 @@ function StaffViewSeating() {
             )}
           </tbody>
         </table>
+
+        {/* 🔥 PAGINATION */}
+        {filtered.length > 0 && (
+          <div className="pagination">
+            <button disabled={currentPage === 1} onClick={prevPage}>
+              ◀ Prev
+            </button>
+
+            <span>
+              Page {currentPage} / {totalPages}
+            </span>
+
+            <button disabled={currentPage === totalPages} onClick={nextPage}>
+              Next ▶
+            </button>
+          </div>
+        )}
       </div>
     </StaffLayout>
   );

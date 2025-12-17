@@ -62,9 +62,6 @@ function ViewStudents() {
     loadStudents(deptFilter, yearFilter);
   };
 
-  // ------------------------------------
-  // PAGINATION LOGIC 
-  // ------------------------------------
   const indexOfLast = currentPage * studentsPerPage;
   const indexOfFirst = indexOfLast - studentsPerPage;
   const paginatedStudents = students.slice(indexOfFirst, indexOfLast);
@@ -78,8 +75,6 @@ function ViewStudents() {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  // ------------------------------------
-
   return (
     <AdminLayout>
       <h1>View Students</h1>

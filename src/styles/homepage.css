@@ -36,7 +36,8 @@
 
 /* MAIN AREA */
 .mainpage {
-  background: linear-gradient(135deg, rgb(255, 230, 230), rgb(194, 255, 141));
+  background: linear-gradient(135deg, rgb(255, 230, 230), #764ba2);
+  /* rgb(194, 255, 141) */
   min-height: 100vh;
   padding: 40px 0;
 }
@@ -51,7 +52,7 @@
 .title {
   font-size: 34px;
   font-weight: bold;
-  color: #007bff;
+  color: rgb(0, 0, 0);
   margin-bottom: 30px;
 }
 

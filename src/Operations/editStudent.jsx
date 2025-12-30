@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../layouts/adminlayout";
-import "../CSS/form.css";
+import "../styles/form.css";
 
 function EditStudent() {
   const { student_id } = useParams();

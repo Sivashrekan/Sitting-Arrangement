@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StaffLayout from "../layouts/stafflayout";
-import "../CSS/form.css";
+import "../styles/form.css";
 
 function StaffEdit() {
   const navigate = useNavigate();

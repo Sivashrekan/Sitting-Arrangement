@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StaffLayout from "../layouts/stafflayout";
-import "../CSS/form.css";
+import "../styles/form.css";
 
 function StaffChangePassword() {
   const navigate = useNavigate();

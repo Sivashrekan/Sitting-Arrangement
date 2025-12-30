@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import './login.css';
+import './styles/login.css';
 
 function Forgot() {
   const [email, setEmail] = useState("");

@@ -3,7 +3,6 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './login';
 import Register from './register';
-import Try from './try';
 import Forgot from './forgot';
 import OtpPage from './otpscreen';
 import Homepage from './pages/homepage';
@@ -56,7 +55,6 @@ function App() {
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/change-password/:admin_id" element={<ChangePassword />} />
-        <Route path="/try" element={<Try />} />
         <Route path="/admin-profile" element={<AdminProfile/>} />
         <Route path="/add-staff" element={<AddStaff />} />
         <Route path="/view-staff" element={<ViewStaff />} />

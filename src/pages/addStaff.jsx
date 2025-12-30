@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AdminLayout from "../layouts/adminlayout";
-import "../CSS/form.css";
+import "../styles/form.css";
 
 function AddStaff() {
   const [staff, setStaff] = useState({

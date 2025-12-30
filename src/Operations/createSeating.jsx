@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../layouts/adminlayout";
-import "../CSS/form.css";
+import "../styles/form.css";
 
 function CreateSeating() {
   const [departments, setDepartments] = useState([]);
@@ -10,15 +10,16 @@ function CreateSeating() {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedYears, setSelectedYears] = useState([]);
 
-  const [examMapping, setExamMapping] = useState({}); 
-  const [yearWiseExams, setYearWiseExams] = useState({}); 
+  const [examMapping, setExamMapping] = useState({});
+  const [yearWiseExams, setYearWiseExams] = useState({});
 
   const [selectedHalls, setSelectedHalls] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
 
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false); // 🔥 NEW
 
-  // Load departments + halls
+  // ---------------- LOAD DEPARTMENTS + HALLS ----------------
   useEffect(() => {
     fetch("/get-departments")
       .then((r) => r.json())
@@ -29,7 +30,7 @@ function CreateSeating() {
       .then((d) => d.success && setAllHalls(d.halls));
   }, []);
 
-  // Filter halls based on department selection
+  // ---------------- FILTER HALLS ----------------
   useEffect(() => {
     if (selectedDepartments.length === 0) {
       setFilteredHalls([]);
@@ -45,7 +46,7 @@ function CreateSeating() {
     setFilteredHalls(halls);
   }, [selectedDepartments, allHalls]);
 
-  // Load exams PER YEAR + PER DEPT
+  // ---------------- LOAD EXAMS PER YEAR ----------------
   useEffect(() => {
     selectedYears.forEach((yr) => {
       fetch("/get-exams-by-dept-year", {
@@ -68,7 +69,7 @@ function CreateSeating() {
     });
   }, [selectedYears, selectedDepartments]);
 
-  // Toggle selectors
+  // ---------------- TOGGLES ----------------
   const toggleDepartment = (id) => {
     id = Number(id);
     setSelectedDepartments((prev) =>
@@ -88,7 +89,7 @@ function CreateSeating() {
     );
   };
 
-  // Submit seating request
+  // ---------------- SUBMIT ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMsg("");
@@ -116,18 +117,27 @@ function CreateSeating() {
       exam_mapping: examMapping,
     };
 
-    const res = await fetch("/generate-seating", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    try {
+      setLoading(true);
 
-    const data = await res.json();
+      const res = await fetch("/generate-seating", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    if (data.success) {
-      setMsg(`✔ Seating created! ${data.assigned} students arranged.`);
-    } else {
-      setMsg(data.message || "Failed to create seating.");
+      const data = await res.json();
+
+      if (data.success) {
+        setMsg(`✔ Seating created! ${data.assigned} students arranged.`);
+      } else {
+        // 🔥 Seat capacity / backend error message
+        setMsg(`❌ ${data.message || "Failed to create seating."}`);
+      }
+    } catch (err) {
+      setMsg("❌ Server error. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -140,7 +150,7 @@ function CreateSeating() {
 
         <form className="form-box" onSubmit={handleSubmit}>
 
-          {/* Departments */}
+          {/* DEPARTMENTS */}
           <label>Select Departments</label>
           <div className="multi-box">
             {departments.map((d) => (
@@ -156,7 +166,7 @@ function CreateSeating() {
             ))}
           </div>
 
-          {/* Years */}
+          {/* YEARS */}
           <label>Select Years</label>
           <div className="multi-box">
             {[1, 2, 3, 4].map((yr) => (
@@ -172,7 +182,7 @@ function CreateSeating() {
             ))}
           </div>
 
-          {/* PER YEAR EXAM DROPDOWNS */}
+          {/* EXAMS */}
           <label>Select Exam For Each Year</label>
           {selectedYears.map((yr) => (
             <div key={yr} style={{ marginBottom: "10px" }}>
@@ -184,7 +194,8 @@ function CreateSeating() {
                     ...prev,
                     [yr]: Number(e.target.value),
                   }))
-                }>
+                }
+              >
                 <option value="">-- Select Exam --</option>
                 {(yearWiseExams[yr] || []).map((ex) => (
                   <option key={ex.exam_id} value={ex.exam_id}>
@@ -195,7 +206,7 @@ function CreateSeating() {
             </div>
           ))}
 
-          {/* Halls */}
+          {/* HALLS */}
           <label>Select Exam Halls</label>
           <div className="multi-box">
             {filteredHalls.length === 0 && (
@@ -208,13 +219,14 @@ function CreateSeating() {
                 className={`multi-item ${
                   selectedHalls.includes(h.hall_id) ? "active" : ""
                 }`}
-                onClick={() => toggleHall(h.hall_id)}>
-                {h.hall_name} — {h.total_seats} seats
+                onClick={() => toggleHall(h.hall_id)}
+              >
+                {h.hall_name}
               </div>
             ))}
           </div>
 
-          {/* Date */}
+          {/* DATE */}
           <label>Select Exam Date</label>
           <input
             type="date"
@@ -222,7 +234,9 @@ function CreateSeating() {
             onChange={(e) => setSelectedDate(e.target.value)}
           />
 
-          <button className="btn">Generate Seating</button>
+          <button className="btn" disabled={loading}>
+            {loading ? "Generating..." : "Generate Seating"}
+          </button>
         </form>
       </div>
     </AdminLayout>

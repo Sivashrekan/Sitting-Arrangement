@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import "../otp.css";
+import "../styles/otp.css";
 
 function OtpStaff() {
   const [otp, setOtp] = useState(new Array(6).fill(""));

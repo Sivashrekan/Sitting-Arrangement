@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../CSS/form.css";
+import "../styles/form.css";
 import AdminLayout from "../layouts/adminlayout";
 
 function AddDepartment() {

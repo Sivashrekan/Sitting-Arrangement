@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../layouts/adminlayout";
-import "../CSS/form.css";
+import "../styles/form.css";
 import "../CSS/viewtable.css";
 
 function ViewSeating() {
@@ -47,9 +47,6 @@ function ViewSeating() {
       });
   };
 
-  // -----------------------------------------------
-  // 🔥 PAGINATION LOGIC
-  // -----------------------------------------------
   const indexLast = currentPage * rowsPerPage;
   const indexFirst = indexLast - rowsPerPage;
   const paginatedData = seating.slice(indexFirst, indexLast);
@@ -63,7 +60,6 @@ function ViewSeating() {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  // -----------------------------------------------
 
   return (
     <AdminLayout>

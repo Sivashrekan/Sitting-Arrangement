@@ -1,4 +1,6 @@
-/* MAIN FORM CONTAINER */
+/* ================================
+   MAIN FORM CONTAINER
+================================ */
 .form-container {
   max-width: 500px;
   margin: 40px auto;
@@ -9,7 +11,9 @@
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* PAGE TITLE */
+/* ================================
+   PAGE TITLE
+================================ */
 .form-container h1,
 .form-container h2 {
   text-align: center;
@@ -19,7 +23,9 @@
   font-weight: 700;
 }
 
-/* SUCCESS / ERROR MESSAGE */
+/* ================================
+   SUCCESS / ERROR MESSAGE
+================================ */
 .msg {
   text-align: center;
   padding: 10px;
@@ -31,14 +37,18 @@
   border: 1px solid #00aa00;
 }
 
-/* FORM BOX */
+/* ================================
+   FORM BOX
+================================ */
 .form-box {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* LABELS */
+/* ================================
+   LABELS
+================================ */
 .form-box label {
   font-size: 16px;
   font-weight: 600;
@@ -46,11 +56,14 @@
   margin-top: 5px;
 }
 
-/* INPUTS + SELECT */
+/* ================================
+   INPUTS + SELECT (GLOBAL)
+================================ */
 input,
 select {
   width: 100%;
-  padding: 12px;
+  height: 44px;                /* 🔥 FIXED HEIGHT */
+  padding: 0 14px;
   font-size: 16px;
   border-radius: 12px;
   border: 1px solid #ccc;
@@ -58,20 +71,25 @@ select {
   margin-bottom: 10px;
   transition: 0.25s;
   background: white;
+  box-sizing: border-box;
 }
 
-/* FOCUS EFFECT */
+/* ================================
+   FOCUS EFFECT
+================================ */
 input:focus,
 select:focus {
   border-color: #005bea;
   box-shadow: 0 0 6px rgba(0, 91, 234, 0.4);
 }
 
-/* BUTTON */
+/* ================================
+   BUTTON
+================================ */
 .btn,
 button {
   width: 100%;
-  padding: 12px;
+  height: 60px;               /* 🔥 SAME HEIGHT */
   margin-top: 20px;
   background: #005bea;
   color: white;
@@ -88,7 +106,9 @@ button:hover {
   background: #0074ff;
 }
 
-/* Dept Button Group */
+/* ================================
+   DEPARTMENT BUTTON GROUP
+================================ */
 .dept-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -116,7 +136,9 @@ button:hover {
   border-color: #003d9a;
 }
 
-/* MULTI SELECT BOX */
+/* ================================
+   MULTI SELECT BOX
+================================ */
 .multi-box {
   display: flex;
   flex-wrap: wrap;
@@ -145,7 +167,9 @@ button:hover {
   font-weight: bold;
 }
 
-/* VIEW STUDENTS FILTERS */
+/* ================================
+   VIEW STUDENTS FILTERS (🔥 FIXED)
+================================ */
 .view-students-container {
   width: 90%;
   margin: auto;
@@ -155,26 +179,42 @@ button:hover {
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
+  align-items: center;       /* 🔥 ALIGN FIX */
+  flex-wrap: wrap;
 }
 
+/* SAME HEIGHT FOR SELECT + DATE */
 .filter-row select,
-.filter-row input {
-  padding: 10px;
+.filter-row input[type="date"] {
+  height: 42px;              /* 🔥 UNIFORM */
+  padding: 0 12px;
   border-radius: 8px;
   border: 1px solid #ddd;
+  font-size: 15px;
   width: 180px;
+  box-sizing: border-box;
 }
 
+/* APPLY BUTTON */
 .apply-btn {
+  height: 42px;
   background: #0066ff;
   color: white;
   border: none;
-  padding: 12px 25px;
+  padding: 0 25px;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-/* MOBILE FIX */
+.apply-btn:hover {
+  background: #0052cc;
+}
+
+/* ================================
+   MOBILE FIX
+================================ */
 @media (max-width: 480px) {
   .form-container {
     width: 92%;
@@ -182,12 +222,20 @@ button:hover {
     padding: 20px;
   }
 
-  input {
+  input,
+  select {
     font-size: 14px;
-    padding: 10px;
+    height: 40px;
   }
 
   .btn {
     font-size: 15px;
+    height: 42px;
+  }
+
+  .filter-row select,
+  .filter-row input[type="date"],
+  .apply-btn {
+    width: 100%;
   }
 }
